@@ -195,7 +195,7 @@ with tab3:
         st.dataframe(df_view)  # Interactive table
         
         st.subheader("Dataset Statistics")
-        st.write(df_view.describe())
+        st.write(df_view.describe(include='all'))
     else:
         st.info("Please upload a CSV file in the Sidebar to view it here.")
         
