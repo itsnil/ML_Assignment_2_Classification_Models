@@ -101,6 +101,7 @@ with tab1:
                 st.write(f"Confidence: **{prob[0]:.2%}**")
 
     # Right Column: Batch Prediction (Upload)
+    # Right Column: Batch Prediction (Upload)
     with col2:
         st.subheader("Batch Prediction (from CSV)")
         if uploaded_file is not None:
@@ -112,18 +113,39 @@ with tab1:
             
             if st.button("Predict on Uploaded Data"):
                 try:
-                    # Note: This assumes uploaded data is already numerically encoded like the training data.
-                    # If real users upload raw text ("Yes"/"No"), you would need to apply encoders here.
-                    predictions = model.predict(df_batch)
+                    # 1. Create a working copy
+                    input_data = df_batch.copy()
                     
-                    # Append results
-                    df_batch['Predicted_Class'] = predictions
-                    df_batch['Predicted_Label'] = df_batch['Predicted_Class'].map({1: 'Positive', 0: 'Negative'})
+                    # 2. Drop 'class' if it exists (Fix for the previous error)
+                    if 'class' in input_data.columns:
+                        input_data = input_data.drop('class', axis=1)
+                        
+                    # 3. ENCODE CATEGORICAL DATA (As in train_model we encoded all features)
+                    # We manually map the values to match LabelEncoder logic (Alphabetical: No=0, Yes=1)
+                    # Note: We apply this to all columns except Age (which is already numeric)
+                    for col in input_data.columns:
+                        if col != 'Age': 
+                            # Map standard values. Use .map() to convert text to numbers
+                            # If the column is already numeric (0/1), this won't break it
+                            if input_data[col].dtype == 'object':
+                                input_data[col] = input_data[col].map({
+                                    'Male': 1, 'Female': 0, 
+                                    'Yes': 1, 'No': 0,
+                                    'Positive': 1, 'Negative': 0
+                                })
+                    
+                    # 4. Run Prediction
+                    predictions = model.predict(input_data)
+                    
+                    # 5. Append results to the ORIGINAL dataframe (readable text)
+                    df_batch['Predicted_Risk'] = predictions
+                    df_batch['Predicted_Risk'] = df_batch['Predicted_Risk'].map({1: 'Positive', 0: 'Negative'})
                     
                     st.success("Predictions generated successfully!")
                     st.dataframe(df_batch)
+
                 except Exception as e:
-                    st.error(f"Error during prediction. Ensure CSV columns match training features.\nError: {e}")
+                    st.error(f"Error during prediction. Details: {e}")
         else:
             st.info("Upload a CSV file in the sidebar to use this feature.")
 
