@@ -155,19 +155,31 @@ with tab1:
 
 # --- TAB 2: EVALUATION METRICS (Requirement c & d) ---
 with tab2:
-    st.header(f"Performance: {selected_model_name}")
+    st.header("📊 Model Performance Evaluation")
     
-    # Get metrics for selected model
+    # SECTION 1: OVERALL COMPARISON (Your New Heatmap)
+    st.subheader("1. Overall Model Comparison")
+    try:
+        comp_image = Image.open(COMPARISON_IMAGE_PATH)
+        st.image(comp_image, caption="Performance Comparison: 6 Models vs 6 Metrics", use_column_width=True)
+    except FileNotFoundError:
+        st.warning(f"Comparison heatmap image ('{COMPARISON_IMAGE_PATH}') not found. Please upload it to your repo.")
+    
+    st.divider()
+
+    # SECTION 2: INDIVIDUAL MODEL PERFORMANCE
+    st.subheader(f"2. Detailed Metrics: {selected_model_name}")
+    st.caption("Note: These metrics were calculated on the Test Set during training.")
+    
+    # Get metrics
     metrics = results.get(selected_model_name, {})
     
     if metrics:
-        # Row 1: Primary Metrics
         c1, c2, c3 = st.columns(3)
         c1.metric("Accuracy", f"{metrics['Accuracy']:.2%}")
         c2.metric("Precision", f"{metrics['Precision']:.2%}")
         c3.metric("Recall", f"{metrics['Recall']:.2%}")
         
-        # Row 2: Secondary Metrics
         c4, c5, c6 = st.columns(3)
         c4.metric("F1 Score", f"{metrics['F1']:.2f}")
         c5.metric("AUC Score", f"{metrics['AUC']:.2f}")
@@ -175,17 +187,14 @@ with tab2:
     else:
         st.warning("No metrics found for this model.")
         
-    st.divider()
-    
-    # Confusion Matrix Image
-    st.subheader("Confusion Matrix")
+    st.write("---")
+    st.subheader(f"Confusion Matrix: {selected_model_name}")
     try:
         cm_image_path = cm_files.get(selected_model_name)
         image = Image.open(cm_image_path)
         st.image(image, caption=f"Confusion Matrix - {selected_model_name}", width=500)
     except Exception:
-        st.warning("Confusion matrix image not found. Ensure 'train_model.ipynb' generated .png files.")
-
+        st.warning("Confusion matrix image not found.")
 # --- TAB 3: DATASET VIEW (New Tab) ---
 with tab3:
     st.header("📂 Dataset Explorer")
