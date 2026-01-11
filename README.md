@@ -30,22 +30,19 @@ All models were trained on 80% of the data and tested on 20%.
 
 ## Models vs Evaluation metrics
 
-            Model       Accuracy     AUC     Precision  Recall      F1        MCC
-1  Logistic Regression  0.923077  0.971404   0.931507  0.957746  0.944444  0.820358
-2        Decision Tree  0.951923  0.964789   1.000000  0.929577  0.963504  0.898479
-3                  KNN  0.855769  0.948570   0.951613  0.830986  0.887218  0.702009
-4          Naive Bayes  0.913462  0.960734   0.930556  0.943662  0.937063  0.798823
-5        Random Forest  0.990385  1.000000   1.000000  0.985915  0.992908  0.978222
-6              XGBoost  0.980769  0.999146   1.000000  0.971831  0.985714  0.957234
-
-
-| ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC 
-| Logistic Regression | 0.923077 | 0.971404 |  0.931507 | 0.957746 | 0.944444 | 0.820358
+| **ML Model Name** | **Accuracy** | **AUC** | **Precision** | **Recall** | **F1** | **MCC** 
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Logistic Regression** | 0.923077 | 0.971404 |  0.931507 | 0.957746 | 0.944444 | 0.820358 |
+| **Decision Tree** | 0.951923 | 0.964789 | 1.000000 | 0.929577 | 0.963504 | 0.898479 |
+| **KNN** | 0.855769 | 0.948570 | 0.951613 | 0.830986 | 0.887218 | 0.702009 |
+| **Naive Bayes** | 0.913462 | 0.960734 | 0.930556 | 0.943662 | 0.937063 | 0.798823 |
+| **Random Forest** | 0.990385 | 1.000000 | 1.000000 | 0.985915 | 0.992908 | 0.978222 |
+| **XGBoost** | 0.980769 | 0.999146 | 1.000000 | 0.971831 | 0.985714 | 0.957234 | 
 
 
 ## Model Performance Observations
 
-| ML Model Name | Observation about model performance |
+| ML Model Name | Observations About Model Performance |
 | :--- | :--- |
 | **Logistic Regression** | This model provided a solid baseline with high Recall (~96%), indicating it is quite sensitive to detecting positive diabetes cases. Its AUC of 0.97 shows excellent capability in distinguishing between classes, though it was slightly outperformed by tree-based methods. |
 | **Decision Tree** | Achieved a perfect Precision score of 1.0, meaning every patient it predicted as "Positive" actually had diabetes (zero False Positives). However, its Recall (93%) was lower than the ensemble methods, meaning it missed a few actual positive cases. |
