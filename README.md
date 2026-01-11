@@ -39,6 +39,10 @@ All models were trained on 80% of the data and tested on 20%.
 6              XGBoost  0.980769  0.999146   1.000000  0.971831  0.985714  0.957234
 
 
+| ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC 
+| Logistic Regression | 0.923077 | 0.971404 |  0.931507 | 0.957746 | 0.944444 | 0.820358
+
+
 ## Model Performance Observations
 
 | ML Model Name | Observation about model performance |
