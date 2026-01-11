@@ -160,7 +160,7 @@ with tab2:
     # SECTION 1: OVERALL COMPARISON (Your New Heatmap)
     st.subheader("1. Overall Model Comparison")
     try:
-        comp_image = Image.open(COMPARISON_IMAGE_PATH)
+        comp_image = Image.open(IMAGE_DIR + "comparison_heatmap.png")
         st.image(comp_image, caption="Performance Comparison: 6 Models vs 6 Metrics", use_column_width=True)
     except FileNotFoundError:
         st.warning(f"Comparison heatmap image ('{COMPARISON_IMAGE_PATH}') not found. Please upload it to your repo.")
