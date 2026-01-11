@@ -65,7 +65,7 @@ st.title("🏥 Diabetes Risk Prediction System")
 st.markdown(f"**Active Model:** `{selected_model_name}`")
 
 # Create 3 Tabs
-tab1, tab2, tab3 = st.tabs(["🚀 Prediction", "📊 Evaluation Metrics", "📂 Dataset View"])
+tab1, tab2, tab3 = st.tabs(["🚀 Prediction", "📊 Model Performance & Evaluation Metrics", "📂 Dataset View"])
 
 # --- TAB 1: PREDICTION (Single & Batch) ---
 with tab1:
