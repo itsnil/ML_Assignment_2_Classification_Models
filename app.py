@@ -8,30 +8,34 @@ from PIL import Image
 # --------------------------------------------------------------------------------
 st.set_page_config(page_title="Diabetes Risk Prediction", layout="wide", page_icon="🏥")
 
+# Define folder names
+MODEL_DIR = "Models/"
+IMAGE_DIR = "Images/"
+
 # Load saved results and checks
 try:
-    results = joblib.load('model_results.pkl')
+    results = joblib.load(MODEL_DIR + 'model_results.pkl')
 except FileNotFoundError:
     st.error("Critical files not found. Please run 'train_model.ipynb' first to generate models and metrics.")
     st.stop()
 
 # Define file paths for models and images
 model_files = {
-    "Logistic Regression": "logistic_regression_model.pkl",
-    "Decision Tree": "decision_tree_model.pkl",
-    "KNN": "knn_model.pkl",
-    "Naive Bayes": "naive_bayes_model.pkl",
-    "Random Forest": "random_forest_model.pkl",
-    "XGBoost": "xgboost_model.pkl"
+    "Logistic Regression": MODEL_DIR + "logistic_regression_model.pkl",
+    "Decision Tree": MODEL_DIR + "decision_tree_model.pkl",
+    "KNN": MODEL_DIR + "knn_model.pkl",
+    "Naive Bayes": MODEL_DIR + "naive_bayes_model.pkl",
+    "Random Forest": MODEL_DIR + "random_forest_model.pkl",
+    "XGBoost": MODEL_DIR + "xgboost_model.pkl"
 }
 
 cm_files = {
-    "Logistic Regression": "logistic_regression_cm.png",
-    "Decision Tree": "decision_tree_cm.png",
-    "KNN": "knn_cm.png",
-    "Naive Bayes": "naive_bayes_cm.png",
-    "Random Forest": "random_forest_cm.png",
-    "XGBoost": "xgboost_cm.png"
+    "Logistic Regression": IMAGE_DIR + "logistic_regression_cm.png",
+    "Decision Tree": IMAGE_DIR + "decision_tree_cm.png",
+    "KNN": IMAGE_DIR + "knn_cm.png",
+    "Naive Bayes": IMAGE_DIR + "naive_bayes_cm.png",
+    "Random Forest": IMAGE_DIR + "random_forest_cm.png",
+    "XGBoost": IMAGE_DIR + "xgboost_cm.png"
 }
 
 # --------------------------------------------------------------------------------
