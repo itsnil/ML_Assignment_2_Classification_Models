@@ -11,6 +11,7 @@ st.set_page_config(page_title="Diabetes Risk Prediction", layout="wide", page_ic
 # Define folder names
 MODEL_DIR = "Models/"
 IMAGE_DIR = "Images/"
+DATASET_PATH = "diabetes_data_upload.csv"  # Defining the Dataset path 
 
 # Load saved results and checks
 try:
@@ -38,16 +39,31 @@ cm_files = {
     "XGBoost": IMAGE_DIR + "xgboost_cm.png"
 }
 
+# Function for File reading for dataset download on Streamlit app
+def get_dataset_binary():
+    with open(DATASET_PATH, "rb") as file:
+        return file.read()
+
 # --------------------------------------------------------------------------------
 # 2. SIDEBAR: INPUTS & CONFIGURATION
 # --------------------------------------------------------------------------------
 st.sidebar.title("Configuration")
 
-# A. Dataset Upload (Requirement a)
+
+# A. Dataset download feature for evaluation
+st.download_button(
+    label="📥 Download Dataset Workbook (CSV)",
+    data=get_dataset_binary(),
+    file_name="diabetes_data_upload.csv",
+    mime="text/csv",
+    help="Click here to download the original dataset used for training."
+)
+
+# B. Dataset Upload
 st.sidebar.subheader("1. Upload Data (Batch Mode)")
 uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=["csv"])
 
-# B. Model Selection (Requirement b)
+# C. Model Selection
 st.sidebar.subheader("2. Select Model")
 selected_model_name = st.sidebar.selectbox("Choose Classifier", list(model_files.keys()))
 
