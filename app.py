@@ -51,7 +51,7 @@ st.sidebar.title("Configuration")
 
 
 # A. Dataset download feature for evaluation
-st.download_button(
+st.sidebar.download_button(
     label="📥 Download Dataset Workbook (CSV)",
     data=get_dataset_binary(),
     file_name="diabetes_data_upload.csv",
