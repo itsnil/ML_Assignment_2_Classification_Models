@@ -51,13 +51,13 @@ st.sidebar.title("Configuration")
 
 
 # A. Dataset download feature for evaluation
-st.sidebar.subheader(download_button(
+st.download_button(
     label="📥 Download Dataset Workbook (CSV)",
     data=get_dataset_binary(),
     file_name="diabetes_data_upload.csv",
     mime="text/csv",
     help="Click here to download the original dataset used for training."
-))
+)
 
 # B. Dataset Upload
 st.sidebar.subheader("1. Upload Data (Batch Mode)")
